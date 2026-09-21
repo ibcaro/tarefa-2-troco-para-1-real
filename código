@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+int main(void) {
+    // conjunto de moedas disponíveis, em ordem decrescente de valor
+    int moedas[] = {100, 50, 25, 10, 5, 1};
+    int qtd_moedas = sizeof(moedas) / sizeof(moedas[0]);
+
+    int valor;
+
+    printf("Digite o valor a ser trocado (em centavos, ate 100 = 1 real): ");
+    scanf("%d", &valor);
+
+    if (valor < 0 || valor > 100) {
+        printf("Valor invalido. Informe um valor entre 0 e 100 centavos.\n");
+        return 1;
+    }
+
+    printf("\nTroco para %d centavos:\n", valor);
+
+    int total_moedas = 0;
+
+    for (int i = 0; i < qtd_moedas; i++) {
+        int moeda = moedas[i];
+        int n = valor / moeda;   // quantas moedas desse valor cabem no troco
+
+        if (n > 0) {
+            printf("%2d moeda(s) de %3d centavo(s)\n", n, moeda);
+            total_moedas += n;
+            valor -= n * moeda;  // atualiza o valor restante
+        }
+    }
+
+    printf("\nTotal de moedas utilizadas: %d\n", total_moedas);
+
+    return 0;
+}
